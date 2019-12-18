@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class Duel 
 {
+    bool[] order;
+    Duelist duelist;
+    Player p;
     // Start is called before the first frame update
     void Start()
     {

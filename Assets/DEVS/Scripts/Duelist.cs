@@ -2,13 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Duelist : MonoBehaviour
 {
-    int currentHP;
-    int maxHP;
-    int killcount;
-    int combocount;
-
     // Start is called before the first frame update
     void Start()
     {

@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    int hp;
+    int maxhp;
+    bool bow;
+
+
     // Start is called before the first frame update
     void Start()
     {
