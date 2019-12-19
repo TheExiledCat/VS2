@@ -9,7 +9,7 @@ public class Battle : MonoBehaviour
     int animationIndex;
     bool sword;
     bool bow;
-    bool attack;
+    bool canAttack=true;
     public float range;
     public LayerMask enemies;
     
@@ -18,9 +18,21 @@ public class Battle : MonoBehaviour
 
     }
 
-    void Attack(bool right)
+    void Attack(bool Right)
     {
-
+        if (!Right&&left.Length>0)
+        {
+            print("hit " + left[0].name);
+            left[0].GetComponent<Enemy>().takeDamage();
+        }
+        else if(Right&&right.Length>0)
+        {
+            print("hit " + right[0].name);
+            left[0].GetComponent<Enemy>().takeDamage();
+        }
+        else {
+            print("miss");
+        }
     }
     void PickupSword()
     {
@@ -41,6 +53,10 @@ public class Battle : MonoBehaviour
     {
         left = Physics2D.OverlapBoxAll(new Vector2(transform.position.x - range / 2, transform.position.y), new Vector2(range + transform.position.x, 1),0,enemies);
         right = Physics2D.OverlapBoxAll(new Vector2(transform.position.x + range / 2, transform.position.y), new Vector2(range - transform.position.x, 1), 0, enemies);
+
+
+        if (Input.GetMouseButtonDown(0)&&canAttack) Attack(false);
+        if (Input.GetMouseButtonDown(1) && canAttack) Attack(true);
     }
 
 
