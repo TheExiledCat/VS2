@@ -5,7 +5,8 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     private Animator animator;
-    public int health = 100;
+    [SerializeField]
+    private int health = 100;
     private bool isAttacked = false;
     void Start()
     {
