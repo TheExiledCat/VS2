@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private int health = 100;
     private bool isAttacked = false;
+    private float range = 100;
     void Start()
     {
         Debug.Log("cono");
