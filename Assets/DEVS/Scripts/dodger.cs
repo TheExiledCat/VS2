@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Duelist : Enemy
+public class dodger : Enemy
 {
     // Start is called before the first frame update
     void Start()
