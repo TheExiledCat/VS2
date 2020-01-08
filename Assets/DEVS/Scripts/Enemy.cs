@@ -6,8 +6,9 @@ public class Enemy : MonoBehaviour
 {
     private Animator animator;
     [SerializeField]
-    private int health = 100;
-
+    private int health;
+    [SerializeField]
+    int hitstun;
     int timer = 0;
     private bool isAttacked = false;
     private float range = 100;
@@ -17,12 +18,7 @@ public class Enemy : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        Debug.Log("IVE BEEN MAC FFALLINN");
-        isAttacked = true;//animation
-    }
-
+   
 
     void hit()
     {
@@ -33,6 +29,8 @@ public class Enemy : MonoBehaviour
     public void takeDamage()
     {
         health--;
+        timer = hitstun;
+        isAttacked = true;
     }
 
     // Update is called once per frame
@@ -40,10 +38,16 @@ public class Enemy : MonoBehaviour
     {
         if (isAttacked)
         {
-            Debug.Log("isAttacked = false");
-            isAttacked = false;
-            hit();
+            GetComponent<SpriteRenderer>().color = Color.blue;
+            if (timer > 0) timer--;
+            else
+            {
+                timer = hitstun;
+                isAttacked = false;
+            }
         }
+        else GetComponent<SpriteRenderer>().color = Color.red;
+        
 
         if (health == 0)
         {
