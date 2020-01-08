@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
     private Animator animator;
     [SerializeField]
     private int health = 100;
+
+    int timer = 0;
     private bool isAttacked = false;
     private float range = 100;
     void Start()
