@@ -13,8 +13,10 @@ public class Battle : MonoBehaviour
     public float range;
     public LayerMask enemies;
     int timer;
+    int invisTime;
+
     [SerializeField]
-    int hitstun;
+    int invis,hitstun;
     void TakeDamage()
     {
 
