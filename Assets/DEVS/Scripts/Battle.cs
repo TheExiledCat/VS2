@@ -14,7 +14,8 @@ public class Battle : MonoBehaviour
     public LayerMask enemies;
     int timer;
     int invisTime;
-
+    [SerializeField]
+    Enemy dashLeft,dashRight;
     [SerializeField]
     int invis,hitstun;
     void TakeDamage()
@@ -24,15 +25,17 @@ public class Battle : MonoBehaviour
 
     void Attack(bool Right)
     {
-        if (!Right&&left.Length>0)
+        if (!Right&&dashLeft)
         {
-            print("hit " + left[0].name);
-            left[0].GetComponent<Enemy>().takeDamage();
+         
+            dashLeft.GetComponent<Enemy>().takeDamage();
+            dash(dashLeft);
         }
-        else if(Right&&right.Length>0)
+        else if(Right&&dashRight)
         {
-            print("hit " + right[0].name);
-            left[0].GetComponent<Enemy>().takeDamage();
+            dash(dashRight);
+            
+            dashRight.GetComponent<Enemy>().takeDamage();
         }
         else {
             print("miss");
@@ -41,6 +44,13 @@ public class Battle : MonoBehaviour
 
         }
     }
+
+    void dash(Enemy target)
+    {
+        if (target.transform.position.x < transform.position.x) transform.position = target.transform.position + Vector3.right;
+        else transform.position = target.transform.position - Vector3.right;
+    }
+
     void PickupSword()
     {
 
@@ -58,9 +68,10 @@ public class Battle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        left = Physics2D.OverlapBoxAll(new Vector2(transform.position.x - range / 2, transform.position.y), new Vector2(range + transform.position.x, 1),0,enemies);
-        right = Physics2D.OverlapBoxAll(new Vector2(transform.position.x + range / 2, transform.position.y), new Vector2(range - transform.position.x, 1), 0, enemies);
-
+        left = Physics2D.OverlapBoxAll(new Vector2(transform.position.x - range / 2, transform.position.y), new Vector2(range, 1),0,enemies);
+        right = Physics2D.OverlapBoxAll(new Vector2(transform.position.x + range / 2, transform.position.y), new Vector2(range , 1), 0, enemies);
+        if (left.Length > 0) dashLeft = left[0].GetComponent<Enemy>();
+        if (right.Length > 0) dashRight = right[0].GetComponent<Enemy>();
 
         if (Input.GetMouseButtonDown(0)&&canAttack) Attack(false);
         if (Input.GetMouseButtonDown(1) && canAttack) Attack(true);
@@ -80,7 +91,7 @@ public class Battle : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.DrawWireCube(new Vector3(transform.position.x - range / 2, transform.position.y), new Vector3(range + transform.position.x, 1));
-        Gizmos.DrawWireCube(new Vector3(transform.position.x+range / 2, transform.position.y), new Vector3(range-transform.position.x , 1));
+        Gizmos.DrawWireCube(new Vector3(transform.position.x - range / 2, transform.position.y), new Vector3(range, 1));
+        Gizmos.DrawWireCube(new Vector3(transform.position.x+range / 2, transform.position.y), new Vector3(range , 1));
     }
 }

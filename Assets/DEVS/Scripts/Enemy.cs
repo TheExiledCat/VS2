@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     int timer = 0;
     private bool isAttacked = false;
     private float range = 100;
-    void Start()
+    virtual protected void  Start()
     {
         Debug.Log("cono");
         animator = GetComponent<Animator>();
@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
 
    
 
-    void hit()
+    protected void hit()
     {
         Debug.Log("start ani");
         //animator.Play("");
@@ -34,12 +34,13 @@ public class Enemy : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+   virtual protected void Update()
     {
+       if(!isAttacked) transform.position= Vector2.MoveTowards(transform.position,GameObject.FindGameObjectWithTag("Player").transform.position,0.01f);
         if (isAttacked)
         {
             GetComponent<SpriteRenderer>().color = Color.blue;
-            if (timer > 0) timer--;
+            if (timer > 0) { timer--; print(timer); }
             else
             {
                 timer = hitstun;
