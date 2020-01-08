@@ -12,7 +12,9 @@ public class Battle : MonoBehaviour
     bool canAttack=true;
     public float range;
     public LayerMask enemies;
-    
+    int timer;
+    [SerializeField]
+    int hitstun;
     void TakeDamage()
     {
 
@@ -32,6 +34,9 @@ public class Battle : MonoBehaviour
         }
         else {
             print("miss");
+            canAttack = false;
+            timer = hitstun;
+
         }
     }
     void PickupSword()
@@ -57,6 +62,17 @@ public class Battle : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0)&&canAttack) Attack(false);
         if (Input.GetMouseButtonDown(1) && canAttack) Attack(true);
+        if (timer>0&&canAttack==false)
+        {
+            GetComponent<SpriteRenderer>().color = Color.yellow;
+            timer--;
+        }else
+        {
+            GetComponent<SpriteRenderer>().color = Color.white;
+            timer = hitstun;
+            canAttack = true;
+        }
+        
     }
 
 

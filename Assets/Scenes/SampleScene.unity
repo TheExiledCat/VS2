@@ -400,6 +400,7 @@ MonoBehaviour:
   enemies:
     serializedVersion: 2
     m_Bits: 256
+  hitstun: 60
 --- !u!114 &1608724419
 MonoBehaviour:
   m_ObjectHideFlags: 0
