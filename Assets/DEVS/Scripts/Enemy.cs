@@ -36,7 +36,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
    virtual protected void Update()
     {
-       if(!isAttacked) transform.position= Vector2.MoveTowards(transform.position,GameObject.FindGameObjectWithTag("Player").transform.position,0.01f);
+       if(!isAttacked) transform.position= Vector2.MoveTowards(transform.position,new Vector3(GameObject.FindGameObjectWithTag("Player").transform.position.x,transform.position.y),0.01f);
+
         if (isAttacked)
         {
             GetComponent<SpriteRenderer>().color = Color.blue;

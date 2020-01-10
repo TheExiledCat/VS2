@@ -47,8 +47,8 @@ public class Battle : MonoBehaviour
 
     void dash(Enemy target)
     {
-        if (target.transform.position.x < transform.position.x) transform.position = target.transform.position + Vector3.right;
-        else transform.position = target.transform.position - Vector3.right;
+        if (target.transform.position.x < transform.position.x) transform.position = new Vector3(target.transform.position.x,transform.position.y) + Vector3.right;
+        else transform.position = new Vector3(target.transform.position.x, transform.position.y) - Vector3.right;
     }
 
     void PickupSword()
@@ -68,8 +68,8 @@ public class Battle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        left = Physics2D.OverlapBoxAll(new Vector2(transform.position.x - range / 2, transform.position.y), new Vector2(range, 1),0,enemies);
-        right = Physics2D.OverlapBoxAll(new Vector2(transform.position.x + range / 2, transform.position.y), new Vector2(range , 1), 0, enemies);
+        left = Physics2D.OverlapBoxAll(new Vector2(transform.position.x - range / 2, 0), new Vector2(range, 1),0,enemies);
+        right = Physics2D.OverlapBoxAll(new Vector2(transform.position.x + range / 2, 0), new Vector2(range , 1), 0, enemies);
         if (left.Length > 0) dashLeft = left[0].GetComponent<Enemy>();
         if (right.Length > 0) dashRight = right[0].GetComponent<Enemy>();
 
@@ -77,11 +77,21 @@ public class Battle : MonoBehaviour
         if (Input.GetMouseButtonDown(1) && canAttack) Attack(true);
         if (timer>0&&canAttack==false)
         {
-            GetComponent<SpriteRenderer>().color = Color.yellow;
+            for(int i = 0; i < transform.childCount; i++)
+            {
+                if(transform.GetChild(i).GetComponent<SpriteRenderer>())
+                transform.GetChild(i).GetComponent<SpriteRenderer>().color = Color.yellow;
+            }
+
             timer--;
         }else
         {
-            GetComponent<SpriteRenderer>().color = Color.white;
+
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                if (transform.GetChild(i).GetComponent<SpriteRenderer>())
+                    transform.GetChild(i).GetComponent<SpriteRenderer>().color = Color.white;
+            }
             timer = hitstun;
             canAttack = true;
         }
@@ -91,7 +101,7 @@ public class Battle : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.DrawWireCube(new Vector3(transform.position.x - range / 2, transform.position.y), new Vector3(range, 1));
-        Gizmos.DrawWireCube(new Vector3(transform.position.x+range / 2, transform.position.y), new Vector3(range , 1));
+        Gizmos.DrawWireCube(new Vector3(transform.position.x - range / 2,0), new Vector3(range, 1));
+        Gizmos.DrawWireCube(new Vector3(transform.position.x+range / 2,0), new Vector3(range ,1));
     }
 }
