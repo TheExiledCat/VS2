@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Linq;
 public class Battle : MonoBehaviour
 {
     public Collider2D[] left;
@@ -18,6 +18,8 @@ public class Battle : MonoBehaviour
     Enemy dashLeft,dashRight;
     [SerializeField]
     int invis,hitstun;
+    Animations a;
+
     void TakeDamage()
     {
 
@@ -47,8 +49,14 @@ public class Battle : MonoBehaviour
 
     void dash(Enemy target)
     {
+
+        a.GetComponent<Animations>().anim.SetInteger("attackIndex",a.GetComponent<Animations>().index);
+
         if (target.transform.position.x < transform.position.x) transform.position = new Vector3(target.transform.position.x,transform.position.y) + Vector3.right;
         else transform.position = new Vector3(target.transform.position.x, transform.position.y) - Vector3.right;
+
+
+
     }
 
     void PickupSword()
@@ -62,7 +70,7 @@ public class Battle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        a = transform.GetChild(0).GetComponent<Animations>();
     }
 
     // Update is called once per frame
@@ -70,6 +78,8 @@ public class Battle : MonoBehaviour
     {
         left = Physics2D.OverlapBoxAll(new Vector2(transform.position.x - range / 2, 0), new Vector2(range, 1),0,enemies);
         right = Physics2D.OverlapBoxAll(new Vector2(transform.position.x + range / 2, 0), new Vector2(range , 1), 0, enemies);
+
+       
         if (left.Length > 0) dashLeft = left[0].GetComponent<Enemy>();
         if (right.Length > 0) dashRight = right[0].GetComponent<Enemy>();
 
