@@ -17,6 +17,6 @@ public class Animations : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        anim.SetInteger("index",index);
     }
 }

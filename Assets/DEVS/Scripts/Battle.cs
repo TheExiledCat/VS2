@@ -50,7 +50,7 @@ public class Battle : MonoBehaviour
     void dash(Enemy target)
     {
 
-        a.GetComponent<Animations>().anim.SetInteger("attackIndex",a.GetComponent<Animations>().index);
+        a.index++;
 
         if (target.transform.position.x < transform.position.x) transform.position = new Vector3(target.transform.position.x,transform.position.y) + Vector3.right;
         else transform.position = new Vector3(target.transform.position.x, transform.position.y) - Vector3.right;
@@ -71,6 +71,7 @@ public class Battle : MonoBehaviour
     void Start()
     {
         a = transform.GetChild(0).GetComponent<Animations>();
+
     }
 
     // Update is called once per frame
