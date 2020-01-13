@@ -12,14 +12,14 @@ public class Battle : MonoBehaviour
     bool canAttack=true;
     public float range;
     public LayerMask enemies;
-    int timer;
+public int timer;
     int invisTime;
     [SerializeField]
     Enemy dashLeft,dashRight;
     [SerializeField]
     int invis,hitstun;
     Animations a;
-
+    public bool idle;
     void TakeDamage()
     {
 
@@ -49,12 +49,22 @@ public class Battle : MonoBehaviour
 
     void dash(Enemy target)
     {
-
+        a.anim.SetTrigger("attack");
         a.index++;
 
-        if (target.transform.position.x < transform.position.x) transform.position = new Vector3(target.transform.position.x,transform.position.y) + Vector3.right;
-        else transform.position = new Vector3(target.transform.position.x, transform.position.y) - Vector3.right;
+        if (target.transform.position.x < transform.position.x)
+        {
+            transform.position = new Vector3(target.transform.position.x, transform.position.y) + Vector3.right;
+            transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
+        }
+        else
+        {
+            transform.position = new Vector3(target.transform.position.x, transform.position.y) - Vector3.right;
+            transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
+        }
 
+
+    
 
 
     }
@@ -77,6 +87,7 @@ public class Battle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         left = Physics2D.OverlapBoxAll(new Vector2(transform.position.x - range / 2, 0), new Vector2(range, 1),0,enemies);
         right = Physics2D.OverlapBoxAll(new Vector2(transform.position.x + range / 2, 0), new Vector2(range , 1), 0, enemies);
 
@@ -93,7 +104,7 @@ public class Battle : MonoBehaviour
                 if(transform.GetChild(i).GetComponent<SpriteRenderer>())
                 transform.GetChild(i).GetComponent<SpriteRenderer>().color = Color.yellow;
             }
-
+            idle = false;
             timer--;
         }else
         {
@@ -103,6 +114,7 @@ public class Battle : MonoBehaviour
                 if (transform.GetChild(i).GetComponent<SpriteRenderer>())
                     transform.GetChild(i).GetComponent<SpriteRenderer>().color = Color.white;
             }
+            idle = true;
             timer = hitstun;
             canAttack = true;
         }
