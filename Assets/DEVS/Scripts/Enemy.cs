@@ -17,8 +17,13 @@ public class Enemy : MonoBehaviour
     Vector3 startscale;
     private bool canAttack=true;
     public GameObject hpBox;
+    Sprite greysprite;
+    Vector3 boxscale;
    void Start()
     {
+        boxscale = hpBox.transform.localScale;
+        greysprite = hpBox.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
+        hpBox.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = hpNumbers[health-1];
         startscale = transform.localScale;
     }
 
@@ -32,11 +37,15 @@ public class Enemy : MonoBehaviour
     public void takeDamage()
     {
         health--;
-        timer = hitstun;
-        isAttacked = true;
-        hpBox.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = hpNumbers[health - 1];
+        if (health > 0)
+        {
+            timer = hitstun;
+            isAttacked = true;
+            hpBox.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = hpNumbers[health-1];
+        }
+        
     }
-
+    
     // Update is called once per frame
    virtual protected void Update()
     {
@@ -44,9 +53,11 @@ public class Enemy : MonoBehaviour
         if (GameObject.FindGameObjectWithTag("Player").transform.position.x < transform.position.x)
         {
             transform.localScale = new Vector3(startscale.x * -1, transform.localScale.y, transform.localScale.z);
+            hpBox.transform.localScale = new Vector3(-boxscale.x, boxscale.y, boxscale.y);
         }
         else{
             transform.localScale = startscale;
+            hpBox.transform.localScale = boxscale;
         }
         if (!isAttacked && Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) > 3&&canAttack) 
         {
