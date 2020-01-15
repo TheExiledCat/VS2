@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
 
     protected void hit()
     {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Battle>().TakeDamage();
         Debug.Log("start ani");
         //animator.Play("");
     }

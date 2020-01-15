@@ -20,7 +20,7 @@ public int timer;
     int invis,hitstun;
     Animations a;
     public bool idle;
-    void TakeDamage()
+    public void TakeDamage()
     {
         GetComponent<Player>().currentHP--;
         timer = hitstun;
