@@ -20,6 +20,9 @@ public int timer;
     int invis,hitstun;
     Animations a;
     public bool idle;
+    [SerializeField]
+    GameObject elements;
+    Vector3 scale;
     public void TakeDamage()
     {
         GetComponent<Player>().currentHP--;
@@ -69,12 +72,14 @@ public int timer;
         if (target.transform.position.x < transform.position.x)
         {
             transform.position = new Vector3(target.transform.position.x, transform.position.y) + Vector3.right;
-            transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
+            transform.GetChild(0).localScale = new Vector3(-scale.x, transform.GetChild(0).localScale.y, transform.GetChild(0).localScale.z);
+        
         }
         else
         {
             transform.position = new Vector3(target.transform.position.x, transform.position.y) - Vector3.right;
-            transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
+            transform.GetChild(0).localScale = new Vector3(scale.x, transform.GetChild(0).localScale.y, transform.GetChild(0).localScale.z);
+           
         }
 
 
@@ -95,6 +100,7 @@ public int timer;
     void Start()
     {
         a = transform.GetChild(0).GetComponent<Animations>();
+        scale = transform.GetChild(0).localScale;
 
     }
 

@@ -1035,7 +1035,7 @@ SpriteRenderer:
   m_Size: {x: 1.15, y: 1.81}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &6458285970823336683
@@ -1574,6 +1574,7 @@ MonoBehaviour:
   health: 1
   hitstun: 120
   hpBox: {fileID: 3907827443082958497}
+  speed: 20
 --- !u!1 &8140007257448965792
 GameObject:
   m_ObjectHideFlags: 0

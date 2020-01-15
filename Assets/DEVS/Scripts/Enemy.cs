@@ -19,6 +19,8 @@ public class Enemy : MonoBehaviour
     public GameObject hpBox;
     Sprite greysprite;
     Vector3 boxscale;
+    [SerializeField]
+    float speed;
    void Start()
     {
         boxscale = hpBox.transform.localScale;
@@ -62,7 +64,7 @@ public class Enemy : MonoBehaviour
         if (!isAttacked && Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) > 3&&canAttack) 
         {
 
-            transform.position = Vector2.MoveTowards(transform.position, new Vector3(GameObject.FindGameObjectWithTag("Player").transform.position.x, transform.position.y), 0.1f);
+            transform.position = Vector2.MoveTowards(transform.position, new Vector3(GameObject.FindGameObjectWithTag("Player").transform.position.x, transform.position.y), speed/100);//movement
             print("walking");
         }else
         {

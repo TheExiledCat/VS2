@@ -67,7 +67,7 @@ public class AttackElements : MonoBehaviour
         armleft.transform.position -=Vector3.right* 0.05f;
         if (Vector3.Distance(transform.position, armleft.transform.position) >= dist) armleft.transform.localPosition = start;
         armright.transform.position += Vector3.right * 0.05f;
-        if (Vector3.Distance(transform.position, armright.transform.position) >= dist) armright.transform.localPosition = -start;
+        if (Vector3.Distance(transform.position, armright.transform.position) >= dist) armright.transform.localPosition = new Vector3(start.x+4,start.y,start.z);
 
 
     }
