@@ -22,7 +22,8 @@ public int timer;
     public bool idle;
     void TakeDamage()
     {
-
+        GetComponent<Player>().currentHP--;
+        timer = hitstun;
     }
 
     void Attack(bool Right)
@@ -40,13 +41,26 @@ public int timer;
             dashRight.GetComponent<Enemy>().takeDamage();
         }
         else {
+            miss(Right);
             print("miss");
             canAttack = false;
             timer = hitstun;
 
         }
     }
-
+    void miss(bool right)
+    {
+        a.anim.SetTrigger("attack");
+        a.index++;
+        if (right)
+        {
+            transform.position += Vector3.right * range;
+        }
+        else
+        {
+            transform.position += Vector3.left * range;
+        }
+    }
     void dash(Enemy target)
     {
         a.anim.SetTrigger("attack");

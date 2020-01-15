@@ -4,20 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    int currentHP;
-    int maxHP;
-    int killcount;
-    int combocount;
+    public int currentHP,maxHP, killcount, combocount;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

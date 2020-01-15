@@ -20,7 +20,7 @@ public class Animations : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (index == 6) index = 0;
+        if (index == 7) index = 0;
         idle = b.idle;
         anim.SetBool("idle", idle);
         anim.SetInteger("index",index);
