@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField]
+    Sprite[] hpNumbers;
     private Animator animator;
     [SerializeField]
     private int health;
@@ -14,6 +16,7 @@ public class Enemy : MonoBehaviour
     private float range = 100;
     Vector3 startscale;
     private bool canAttack=true;
+    public GameObject hpBox;
    void Start()
     {
         startscale = transform.localScale;
@@ -31,12 +34,13 @@ public class Enemy : MonoBehaviour
         health--;
         timer = hitstun;
         isAttacked = true;
+        hpBox.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = hpNumbers[health - 1];
     }
 
     // Update is called once per frame
    virtual protected void Update()
     {
-
+        
         if (GameObject.FindGameObjectWithTag("Player").transform.position.x < transform.position.x)
         {
             transform.localScale = new Vector3(startscale.x * -1, transform.localScale.y, transform.localScale.z);
