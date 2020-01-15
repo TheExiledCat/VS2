@@ -105,9 +105,15 @@ public int timer;
         left = Physics2D.OverlapBoxAll(new Vector2(transform.position.x - range / 2, 0), new Vector2(range, 1),0,enemies);
         right = Physics2D.OverlapBoxAll(new Vector2(transform.position.x + range / 2, 0), new Vector2(range , 1), 0, enemies);
 
-       
-        if (left.Length > 0) dashLeft = left[0].GetComponent<Enemy>();
-        if (right.Length > 0) dashRight = right[0].GetComponent<Enemy>();
+
+        if (left.Length > 0)
+        {
+            dashLeft = left[0].GetComponent<Enemy>();
+        }
+        if (right.Length > 0) 
+        { 
+            dashRight = right[0].GetComponent<Enemy>(); 
+        }
 
         if (Input.GetMouseButtonDown(0)&&canAttack) Attack(false);
         if (Input.GetMouseButtonDown(1) && canAttack) Attack(true);
