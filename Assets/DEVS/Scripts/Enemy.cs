@@ -21,8 +21,10 @@ public class Enemy : MonoBehaviour
     Vector3 boxscale;
     [SerializeField]
     float speed;
+   public  GameObject head;
    void Start()
     {
+        head = transform.GetChild(0).GetChild(2).gameObject;
         boxscale = hpBox.transform.localScale;
         greysprite = hpBox.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
         hpBox.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = hpNumbers[health-1];

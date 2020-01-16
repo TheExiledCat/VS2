@@ -23,6 +23,7 @@ public int timer;
     [SerializeField]
     GameObject elements;
     Vector3 scale;
+    
     public void TakeDamage()
     {
         GetComponent<Player>().currentHP--;
@@ -35,14 +36,14 @@ public int timer;
         if (!Right&&dashLeft)
         {
          
-            dashLeft.GetComponent<Enemy>().takeDamage();
+           
             dash(dashLeft);
         }
         else if(Right&&dashRight)
         {
             dash(dashRight);
             
-            dashRight.GetComponent<Enemy>().takeDamage();
+            
         }
         else {
             miss(Right);
@@ -77,14 +78,19 @@ public int timer;
         {
             transform.position = new Vector3(target.transform.position.x, transform.position.y) + Vector3.right*3;
             transform.GetChild(0).localScale = new Vector3(-scale.x, transform.GetChild(0).localScale.y, transform.GetChild(0).localScale.z);
-        
+            GetComponent<Particles>().hit(target.head.transform.position, false);
+            dashLeft.GetComponent<Enemy>().takeDamage();
+
         }
         else
         {
             transform.position = new Vector3(target.transform.position.x, transform.position.y) - Vector3.right*3;
             transform.GetChild(0).localScale = new Vector3(scale.x, transform.GetChild(0).localScale.y, transform.GetChild(0).localScale.z);
-           
+            GetComponent<Particles>().hit(target.head.transform.position, true);
+            dashRight.GetComponent<Enemy>().takeDamage();
         }
+
+        
     }
 
    
