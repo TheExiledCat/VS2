@@ -1568,9 +1568,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpNumbers:
-  - {fileID: 21300000, guid: e25e8876640721246aec7415871eeb52, type: 3}
-  - {fileID: 21300000, guid: 968199e3944497141b532b118d437e58, type: 3}
-  - {fileID: 21300000, guid: ba4569e9ba5511c409d93a23ee4d31c9, type: 3}
+  - {fileID: 21300000, guid: 2b51c330576a01f43967a748234f04b2, type: 3}
+  - {fileID: 21300000, guid: dcdd126c1a61c494088f7460265ac844, type: 3}
+  - {fileID: 21300000, guid: fbd0190ee8ef4fd4d8712b57c2086f03, type: 3}
   health: 1
   hitstun: 120
   hpBox: {fileID: 3907827443082958497}

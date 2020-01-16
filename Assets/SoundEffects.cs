@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class SoundEffects : MonoBehaviour
 {
+    [SerializeField]
     AudioClip[] punches;
     // Start is called before the first frame update
   
 
-    // Update is called once per frame
-    void Update()
+   public void play()
     {
-        
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(punches[Random.Range(0, 2)]);
+    }
+    public void miss()
+    {
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(punches[(int)Random.Range(4, 6)]);
     }
 }

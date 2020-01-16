@@ -31,6 +31,7 @@ public int timer;
 
     void Attack(bool Right)
     {
+
         if (!Right&&dashLeft)
         {
          
@@ -50,9 +51,11 @@ public int timer;
             timer = hitstun;
 
         }
+        
     }
     void miss(bool right)
     {
+        GetComponent<SoundEffects>().miss();
         a.anim.SetTrigger("attack");
         a.index++;
         if (right)
@@ -66,36 +69,25 @@ public int timer;
     }
     void dash(Enemy target)
     {
+        GetComponent<SoundEffects>().play();
         a.anim.SetTrigger("attack");
         a.index++;
 
         if (target.transform.position.x < transform.position.x)
         {
-            transform.position = new Vector3(target.transform.position.x, transform.position.y) + Vector3.right;
+            transform.position = new Vector3(target.transform.position.x, transform.position.y) + Vector3.right*3;
             transform.GetChild(0).localScale = new Vector3(-scale.x, transform.GetChild(0).localScale.y, transform.GetChild(0).localScale.z);
         
         }
         else
         {
-            transform.position = new Vector3(target.transform.position.x, transform.position.y) - Vector3.right;
+            transform.position = new Vector3(target.transform.position.x, transform.position.y) - Vector3.right*3;
             transform.GetChild(0).localScale = new Vector3(scale.x, transform.GetChild(0).localScale.y, transform.GetChild(0).localScale.z);
            
         }
-
-
-    
-
-
     }
 
-    void PickupSword()
-    {
-
-    }
-    void StartDuel(Duel duel, Duelist e,Player p)
-    {
-
-    }
+   
     // Start is called before the first frame update
     void Start()
     {
