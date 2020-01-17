@@ -9,7 +9,7 @@ public class Battle : MonoBehaviour
     int animationIndex;
     bool sword;
     bool bow;
-    bool canAttack=true;
+    public bool canAttack=true;
     public float range;
     public LayerMask enemies;
 public int timer;

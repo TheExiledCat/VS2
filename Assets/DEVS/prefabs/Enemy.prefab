@@ -1575,6 +1575,7 @@ MonoBehaviour:
   hitstun: 120
   hpBox: {fileID: 3907827443082958497}
   speed: 20
+  head: {fileID: 0}
 --- !u!1 &8140007257448965792
 GameObject:
   m_ObjectHideFlags: 0

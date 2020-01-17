@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public Bar[] bars;
     [SerializeField]
     Sprite[] hpNumbers;
     private Animator animator;
-    [SerializeField]
-    private int health;
+
+    public int health;
     [SerializeField]
     int hitstun;
     int timer = 0;
@@ -21,7 +22,10 @@ public class Enemy : MonoBehaviour
     Vector3 boxscale;
     [SerializeField]
     float speed;
+    bool hasBar;
+    
    public  GameObject head;
+    
    void Start()
     {
         head = transform.GetChild(0).GetChild(2).gameObject;
@@ -29,6 +33,8 @@ public class Enemy : MonoBehaviour
         greysprite = hpBox.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
         hpBox.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = hpNumbers[health-1];
         startscale = transform.localScale;
+        if (health > 0) hasBar = true;
+        
     }
 
     protected void hit()
