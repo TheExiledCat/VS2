@@ -14,14 +14,11 @@ public class Particles : MonoBehaviour
     }
     public void hit(Vector3 pos,bool right)
     {
-        if(right)
-        Destroy(Instantiate(punch, pos, Quaternion.identity),2);
-        else
-        {
-           GameObject part= Instantiate(punch, pos, Quaternion.identity);
+        GameObject part = Instantiate(punch, pos, Quaternion.identity);
+
+        if (!right)
             part.transform.localScale = new Vector3(-part.transform.localScale.x, part.transform.localScale.y, transform.localScale.z);
-            Destroy(part, 2);
-        }
-        if(GameManager.GM.kills%40==0) Destroy(Instantiate(wave, pos, Quaternion.identity), 2);
+
+        Destroy(part, 2f);
     }
 }

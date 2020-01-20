@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     Sprite[] hpNumbers;
     private Animator animator;
-
+    
     public int health;
     [SerializeField]
     int hitstun;
@@ -23,25 +23,25 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     float speed;
     bool hasBar;
-    
+    EnemyAnim anim;
    public  GameObject head;
     
    void Start()
     {
+        anim = GetComponent<EnemyAnim>();
         head = transform.GetChild(0).GetChild(2).gameObject;
         boxscale = hpBox.transform.localScale;
         greysprite = hpBox.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
         hpBox.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = hpNumbers[health-1];
         startscale = transform.localScale;
-        if (health > 0) hasBar = true;
-        
+ 
     }
 
     protected void hit()
     {
-        GameObject.FindGameObjectWithTag("Player").GetComponent<Battle>().TakeDamage();
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Health>().TakeDamage();
         Debug.Log("start ani");
-        //animator.Play("");
+        anim.Punch();
     }
 
     public void takeDamage()
@@ -50,10 +50,15 @@ public class Enemy : MonoBehaviour
         if (health > 0)
         {
             timer = hitstun;
+            canAttack = false;
             isAttacked = true;
             hpBox.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = hpNumbers[health-1];
         }
-        
+        else 
+        {
+            Destroy(gameObject);
+        }
+
     }
     
     // Update is called once per frame
@@ -69,21 +74,24 @@ public class Enemy : MonoBehaviour
             transform.localScale = startscale;
             hpBox.transform.localScale = boxscale;
         }
-        if (!isAttacked && Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) > 3&&canAttack) 
-        {
-
-            transform.position = Vector2.MoveTowards(transform.position, new Vector3(GameObject.FindGameObjectWithTag("Player").transform.position.x, transform.position.y), speed/100);//movement
-            print("walking");
-        }else
-        {
-            hit();
-            timer = hitstun;
-        }
-        print(isAttacked);
-        if (isAttacked)
+        if ( Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) > 3) 
         {
             
-            if (timer > 0) { timer--; print(timer); canAttack = false; }
+            transform.position = Vector2.MoveTowards(transform.position, new Vector3(GameObject.FindGameObjectWithTag("Player").transform.position.x, transform.position.y), speed/100);//movement
+            anim.walking = true;
+        }
+        else if(canAttack) {
+            hit();
+            timer = hitstun;
+            canAttack = false;
+            anim.walking = false;
+        }
+        
+       
+        if (!canAttack)
+        {
+            
+            if (timer > 0) { timer--; print(timer); }
             else
             {
                 canAttack = true;
@@ -94,9 +102,6 @@ public class Enemy : MonoBehaviour
         
         
 
-        if (health == 0)
-        {
-            Destroy(gameObject);
-        }
+        
     }
 }

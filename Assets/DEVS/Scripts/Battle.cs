@@ -24,24 +24,20 @@ public int timer;
     GameObject elements;
     Vector3 scale;
     
-    public void TakeDamage()
-    {
-        GetComponent<Player>().currentHP--;
-        timer = hitstun;
-    }
+   
 
     void Attack(bool Right)
     {
 
         if (!Right&&dashLeft)
         {
-         
+
+            StartCoroutine(dash(dashLeft));
            
-            dash(dashLeft);
         }
         else if(Right&&dashRight)
         {
-            dash(dashRight);
+            StartCoroutine(dash(dashRight));
             
             
         }
@@ -61,36 +57,62 @@ public int timer;
         a.index++;
         if (right)
         {
+            transform.GetChild(0).localScale = new Vector3(scale.x, transform.GetChild(0).localScale.y, transform.GetChild(0).localScale.z);
             transform.position += Vector3.right * range;
         }
         else
         {
+            transform.GetChild(0).localScale = new Vector3(-scale.x, transform.GetChild(0).localScale.y, transform.GetChild(0).localScale.z);
             transform.position += Vector3.left * range;
         }
     }
-    void dash(Enemy target)
+    IEnumerator dash(Enemy target)
     {
+        int frames = 5;
         GetComponent<SoundEffects>().play();
         a.anim.SetTrigger("attack");
         a.index++;
-
+        float dist = Vector3.Distance(transform.position, target.transform.position);
         if (target.transform.position.x < transform.position.x)
         {
-            transform.position = new Vector3(target.transform.position.x, transform.position.y) + Vector3.right*3;
             transform.GetChild(0).localScale = new Vector3(-scale.x, transform.GetChild(0).localScale.y, transform.GetChild(0).localScale.z);
-            GetComponent<Particles>().hit(target.head.transform.position, false);
-            dashLeft.GetComponent<Enemy>().takeDamage();
+            for (int i = 0; i < frames; i++)
+            {
+                transform.position = new Vector3(transform.position.x-dist/frames, transform.position.y);
+                yield return new WaitForEndOfFrame();
+            }
+            
+          
+            
+            
+           
+            if (target)
+            {
+                GetComponent<Particles>().hit(target.head.transform.position, false);
+                dashLeft.GetComponent<Enemy>().takeDamage();
+            }
+           
 
         }
         else
         {
-            transform.position = new Vector3(target.transform.position.x, transform.position.y) - Vector3.right*3;
             transform.GetChild(0).localScale = new Vector3(scale.x, transform.GetChild(0).localScale.y, transform.GetChild(0).localScale.z);
-            GetComponent<Particles>().hit(target.head.transform.position, true);
-            dashRight.GetComponent<Enemy>().takeDamage();
+            for (int i = 0; i < frames; i++)
+            {
+                transform.position = new Vector3(transform.position.x + dist / frames, transform.position.y);
+                yield return new WaitForEndOfFrame();
+            }
+
+
+            if (target)
+            {
+                GetComponent<Particles>().hit(target.head.transform.position, true);
+                dashRight.GetComponent<Enemy>().takeDamage();
+            }
+           
         }
 
-        
+        yield return null;
     }
 
    

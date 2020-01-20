@@ -13,7 +13,7 @@ public class AttackElements : MonoBehaviour
     public GameObject armleft;
     public GameObject armright;
     public float dist;
-    
+    public GameObject mouse;
     Vector3 start;
     // Start is called before the first frame update
 
@@ -29,6 +29,7 @@ public class AttackElements : MonoBehaviour
         if (b.left.Length > 0)
         {
             armleft.SetActive(true);
+            mouse.SetActive(true);
             left.GetComponent<SpriteRenderer>().sprite = blueBar;
             for (int i = 0; i < b.left.Length; i++)
             {
@@ -39,11 +40,13 @@ public class AttackElements : MonoBehaviour
         else 
         {
             armleft.SetActive(false);
+            mouse.SetActive(false);
             left.GetComponent<SpriteRenderer>().sprite = greyBarLeft;
             
         }
         if (b.right.Length > 0)
         {
+            mouse.SetActive(true);
             armright.SetActive(true);
             right.GetComponent<SpriteRenderer>().sprite = redBar;
             for (int i = 0; i < b.right.Length; i++)
@@ -54,6 +57,7 @@ public class AttackElements : MonoBehaviour
         }
         else
         {
+            mouse.SetActive(false);
             armright.SetActive(false);
             right.GetComponent<SpriteRenderer>().sprite = greyBarRight;
         }
