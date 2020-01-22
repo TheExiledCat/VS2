@@ -26,7 +26,7 @@ public class AttackElements : MonoBehaviour
     void Update()
     {
         moveHands();
-        if (b.left.Length > 0)
+        if (b.dashLeft)
         {
             armleft.SetActive(true);
             mouse.SetActive(true);
@@ -44,7 +44,7 @@ public class AttackElements : MonoBehaviour
             left.GetComponent<SpriteRenderer>().sprite = greyBarLeft;
             
         }
-        if (b.right.Length > 0)
+        if (b.dashRight)
         {
             mouse.SetActive(true);
             armright.SetActive(true);

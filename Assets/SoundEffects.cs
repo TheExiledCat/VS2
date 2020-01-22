@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SoundEffects : MonoBehaviour
 {
-    [SerializeField]
-    AudioClip[] punches;
+
+   public  AudioClip[] punches;
     // Start is called before the first frame update
   
 

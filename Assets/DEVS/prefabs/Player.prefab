@@ -888,7 +888,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 32767
+  m_SortingOrder: 18615
   m_Sprite: {fileID: 21300000, guid: 8f572cd44c74a3e45b4132fc153abe48, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -2444,7 +2444,7 @@ MonoBehaviour:
   left: []
   right: []
   canAttack: 1
-  range: 6.76
+  range: 6.26
   enemies:
     serializedVersion: 2
     m_Bits: 256
@@ -2452,7 +2452,8 @@ MonoBehaviour:
   dashLeft: {fileID: 0}
   dashRight: {fileID: 0}
   invis: 0
-  hitstun: 0
+  hitstun: 60
+  a: {fileID: 0}
   idle: 0
   elements: {fileID: 8998463573517626314}
 --- !u!114 &4390298781447863615
@@ -2543,6 +2544,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7ddaf2da9611348a25da9fc118cc5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 10
+  hearts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &9197598391378304244
 GameObject:
   m_ObjectHideFlags: 0
