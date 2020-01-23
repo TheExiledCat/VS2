@@ -15,8 +15,9 @@ public class GameManager : MonoBehaviour
     float chance=3;
     int timer;
     public GameObject missE;
-    
+    public TextMeshProUGUI t1;
     public TextMeshProUGUI t;
+    int hits;
     void Awake()
     {
 
@@ -34,7 +35,11 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
     }
-
+    public void combo()
+    {
+        hits++;
+        t1.text = hits.ToString("000");
+    }
     void Start()
     {
         Camera.main.GetComponent<AudioSource>().PlayOneShot(start);

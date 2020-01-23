@@ -74,6 +74,7 @@ public int timer;
     }
     IEnumerator dash(Enemy target)
     {
+        GameManager.GM.combo();
         int xOff=1 ;
         int frames = 5;
         invis = hitstun;
